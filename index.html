@@ -3,133 +3,130 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>蝦皮分潤連結轉換</title>
+<title>蝦皮分潤連結工具</title>
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---bg:#eef2f4;--card:#fff;--ink:#14232b;--mute:#5b6b73;--line:#cfd9de;--acc:#0f6b6b;--acc-ink:#fff;--bad:#b3261e}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a1f;--card:#17262d;--ink:#e6eef1;--mute:#93a5ad;--line:#2b3e47;--acc:#4fc3c3;--acc-ink:#06201f;--bad:#ff8a80}}
-:root[data-theme="dark"]{--bg:#0f1a1f;--card:#17262d;--ink:#e6eef1;--mute:#93a5ad;--line:#2b3e47;--acc:#4fc3c3;--acc-ink:#06201f;--bad:#ff8a80}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{box-sizing:border-box;--bg:#eef2f4;--card:#fff;--ink:#14232b;--mute:#5b6b73;--line:#cfd9de;--acc:#0f6b6b;--acc-ink:#fff;--bad:#b3261e}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a1f;--card:#17262d;--ink:#e6eef1;--mute:#93a5ad;--line:#2b3e47;--acc:#4fc3c3;--acc-ink:#06201f;--bad:#ff8a80}}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
 main{max-width:640px;margin:0 auto;padding:20px 16px 48px}
-h1{font-size:1.5rem;margin:8px 0 4px}
-p.lead{margin:0 0 20px;color:var(--mute)}
+h1{font-size:1.5rem;margin:8px 0 16px}
+h2{font-size:1.15rem;margin:0 0 8px}
 label{display:block;font-weight:600;margin:16px 0 6px}
-input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
-textarea{min-height:130px;resize:vertical}
-input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.hint{font-size:.85rem;color:var(--mute);margin:4px 0 0}
+textarea{width:100%;min-height:130px;resize:vertical;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+textarea:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--mute);margin:8px 0 0}
 .row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-button{font:inherit;font-weight:600;border-radius:8px;padding:10px 18px;border:1px solid var(--acc);cursor:pointer}
+button{font:inherit;font-weight:600;border-radius:8px;padding:10px 16px;border:1px solid var(--acc);cursor:pointer}
 .primary{background:var(--acc);color:var(--acc-ink)}
 .ghost{background:transparent;color:var(--acc)}
-.item{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px;overflow-wrap:anywhere}
 .item.err{border-color:var(--bad)}
 .item .src{font-size:.8rem;color:var(--mute);overflow-wrap:anywhere}
 .item .out{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;overflow-wrap:anywhere;margin:6px 0}
 .item .msg{color:var(--bad);margin:6px 0 0}
-.item .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.85rem;color:var(--mute)}
-.item button{padding:6px 12px}
-#res{margin-top:24px}
+.item .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.85rem;color:var(--mute);margin-top:8px}
+.item button{padding:7px 12px}
+#res{margin-top:16px}
+ul{padding-left:1.35rem;margin:8px 0}
+li{margin:5px 0}
 </style>
 </head>
 <body>
 <main>
-<p> 貼上長網址 轉換 複製 購買 得到優惠93折<p/>
-<!-- 隱藏分潤 ID 輸入框，直接在程式碼中固定 -->
-<input type="hidden" id="aff" value="16364940033">
-
+<h1>蝦皮分潤連結工具</h1>
 <label for="inp">商品網址（一行一個）</label>
-<textarea id="inp" placeholder="https://shopee.tw/product/26416265/874323592"></textarea>
-<p class="hint">也可貼 Threads 跳轉連結的長網址，會自動清理。蝦皮短網址（shp.ee）需先展開成完整網址。</p>
-
+<textarea id="inp" placeholder="貼上蝦皮商品完整網址"></textarea>
 <div class="row">
 <button class="primary" id="go">轉換</button>
 <button class="ghost" id="copyAll">複製全部</button>
 </div>
-
 <div id="res" aria-live="polite"></div>
+<section class="item">
+<h2>優惠券使用說明</h2>
+<ul>
+<li>蝦皮官方不定期發放優惠券
+  <ul>
+    <li>93 折：低消 $49，最高折 $50</li>
+    <li>9 折：低消 $49，最高折 $100</li>
+  </ul>
+</li>
+<li>透過轉換連結下單，可能自動領取優惠券。</li>
+<li>下單前請確認是否已套用優惠券。</li>
+<li>透過本工具產生的蝦皮連結購買商品，本工具可能獲得分潤，但不會增加您的購買金額。</li>
+</ul>
+<p class="hint">實際優惠、折抵門檻與適用商品，以蝦皮活動及結帳頁面為準。</p>
+</section>
 </main>
-
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
 function store(op,k,v){try{return op==='g'?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}}
-
 function today(){
-  var p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'2-digit',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
-  var o={};p.forEach(function(x){o[x.type]=x.value});
-  return o.year+o.month+o.day;
+ var p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'2-digit',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ var o={};p.forEach(function(x){o[x.type]=x.value});return o.year+o.month+o.day;
 }
 function cleanShopee(u){
-  var h=u.hostname.replace(/^www\./,'');
-  if(/(^|\.)shp\.ee$|^s\.shopee\.tw$|^shope\.ee$/.test(h))return {err:'這是短網址，無法在這裡轉換。請先在瀏覽器打開，複製商品頁的完整網址。'};
-  if(h!=='shopee.tw')return {err:'不是蝦皮台灣（shopee.tw）的網址。'};
-  var p=u.pathname,m;
-  if((m=p.match(/^\/product\/(\d+)\/(\d+)/)))return {url:'https://shopee.tw/product/'+m[1]+'/'+m[2]};
-  if((m=p.match(/^\/[^\/]+\/(\d+)\/(\d+)\/?$/)))return {url:'https://shopee.tw/product/'+m[1]+'/'+m[2]};
-  if((m=p.match(/-i\.(\d+)\.(\d+)/)))return {url:'https://shopee.tw/product/'+m[1]+'/'+m[2]};
-  return {url:'https://shopee.tw'+p};
+ var h=u.hostname.replace(/^www\./,'');
+ if(/(^|\.)shp\.ee$|^s\.shopee\.tw$|^shope\.ee$/.test(h))return {err:'這是短網址，請先在瀏覽器打開並複製商品頁的完整網址。'};
+ if(h!=='shopee.tw')return {err:'請輸入蝦皮台灣（shopee.tw）的網址。'};
+ var p=u.pathname,m;
+ if((m=p.match(/^\/product\/(\d+)\/(\d+)/)))return {url:'https://shopee.tw/product/'+m[1]+'/'+m[2]};
+ if((m=p.match(/^\/[^\/]+\/(\d+)\/(\d+)\/?$/)))return {url:'https://shopee.tw/product/'+m[1]+'/'+m[2]};
+ if((m=p.match(/-i\.(\d+)\.(\d+)/)))return {url:'https://shopee.tw/product/'+m[1]+'/'+m[2]};
+ return {url:'https://shopee.tw'+p};
 }
 function parse(raw){
-  var u;
-  try{u=new URL(raw)}catch(e){return {err:'網址格式不正確。'}}
-  if(/^l\.(threads\.(com|net)|instagram\.com)$/.test(u.hostname)){
-    var inner=u.searchParams.get('u');
-    if(!inner)return {err:'找不到跳轉連結裡的網址。'};
-    try{u=new URL(inner)}catch(e){return {err:'跳轉連結裡的網址無法解析。'}}
-  }
-  return cleanShopee(u);
+ var u;try{u=new URL(raw)}catch(e){return {err:'網址格式不正確。'}}
+ if(/^l\.(threads\.(com|net)|instagram\.com)$/.test(u.hostname)){
+  var inner=u.searchParams.get('u');if(!inner)return {err:'找不到跳轉連結裡的網址。'};
+  try{u=new URL(inner)}catch(e){return {err:'跳轉連結裡的網址無法解析。'}}
+ }
+ return cleanShopee(u);
 }
 var results=[];
 function render(){
-  var box=$('res');box.innerHTML='';
-  results.forEach(function(r,i){
-    var d=document.createElement('div');d.className='item'+(r.err?' err':'');
-    var s=document.createElement('div');s.className='src';s.textContent=r.src;d.appendChild(s);
-    if(r.err){var m=document.createElement('p');m.className='msg';m.textContent=r.err;d.appendChild(m)}
-    else{
-      var o=document.createElement('div');o.className='out';o.textContent=r.out;d.appendChild(o);
-      var mt=document.createElement('div');mt.className='meta';
-      var t=document.createElement('span');t.textContent='sub_id：'+r.sub;mt.appendChild(t);
-      var b=document.createElement('button');b.className='ghost';b.textContent='複製';
-      b.addEventListener('click',function(){copy(r.out,b)});mt.appendChild(b);d.appendChild(mt);
-    }
-    box.appendChild(d);
-  });
+ var box=$('res');box.innerHTML='';
+ results.forEach(function(r){
+  var d=document.createElement('div');d.className='item'+(r.err?' err':'');
+  var s=document.createElement('div');s.className='src';s.textContent=r.src;d.appendChild(s);
+  if(r.err){var m=document.createElement('p');m.className='msg';m.textContent=r.err;d.appendChild(m)}
+  else{
+   var o=document.createElement('div');o.className='out';o.textContent=r.out;d.appendChild(o);
+   var mt=document.createElement('div');mt.className='meta';
+   var t=document.createElement('span');t.textContent='分潤連結已產生';mt.appendChild(t);
+   var b=document.createElement('button');b.className='ghost';b.textContent='複製連結';
+   b.addEventListener('click',function(){copy(r.out,b)});mt.appendChild(b);
+   var goBtn=document.createElement('button');goBtn.className='primary';goBtn.textContent='直接前往購買';
+   goBtn.addEventListener('click',function(){window.open(r.out,'_blank','noopener,noreferrer')});mt.appendChild(goBtn);
+   d.appendChild(mt);
+  }
+  box.appendChild(d);
+ });
 }
 function copy(text,btn){
-  function done(){if(btn){var o=btn.textContent;btn.textContent='已複製';setTimeout(function(){btn.textContent=o},1200)}}
-  function fallback(){
-    var t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';
-    document.body.appendChild(t);t.select();
-    try{document.execCommand('copy');done()}catch(e){}
-    document.body.removeChild(t);
-  }
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback)}else fallback();
+ function done(){if(btn){var old=btn.textContent;btn.textContent='已複製';setTimeout(function(){btn.textContent=old},1200)}}
+ function fallback(){var t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(t)}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done,fallback);else fallback();
 }
 $('go').addEventListener('click',function(){
-  var aff=$('aff').value.trim();
-  if(!/^\d+$/.test(aff)){results=[{src:'',err:'分潤 ID 必須是純數字。'}];render();return}
-  var lines=$('inp').value.match(/https?:\/\/\S+/g)||[];
-  var d=today(),key='seq'+d,n=parseInt(store('g',key)||'0',10)||0;
-  results=lines.map(function(raw){
-    var c=parse(raw),short=raw.length>90?raw.slice(0,87)+'…':raw;
-    if(c.err)return {src:short,err:c.err};
-    n++;var sub=d+'-'+(n<10?'0'+n:n);
-    // 修改處：產出長連結，並在外面加上「請放長連結 複製後點連結購買可以有93折優惠」的提示文字
-    var targetUrl='https://s.shopee.tw/an_redir?origin_link='+encodeURIComponent(c.url)+'&affiliate_id='+aff+'&sub_id='+sub;
-    var finalOutput='請放長連結 複製後點連結購買可以有93折優惠\n' + targetUrl;
-    return {src:short,sub:sub,out:finalOutput};
-  });
-  store('s',key,String(n));
-  if(!results.length)results=[{src:'',err:'沒有找到網址，請貼上以 https:// 開頭的連結。'}];
-  render();
+ var aff='16364940033';
+ var lines=$('inp').value.match(/https?:\/\/\S+/g)||[];
+ var d=today(),key='seq'+d,n=parseInt(store('g',key)||'0',10)||0;
+ results=lines.map(function(raw){
+  var c=parse(raw),short=raw.length>90?raw.slice(0,87)+'…':raw;
+  if(c.err)return {src:short,err:c.err};
+  n++;var sub=d+'-'+(n<10?'0'+n:n);
+  var targetUrl='https://s.shopee.tw/an_redir?origin_link='+encodeURIComponent(c.url)+'&affiliate_id='+aff+'&sub_id='+sub;
+  return {src:short,sub:sub,out:targetUrl};
+ });
+ store('s',key,String(n));
+ if(!results.length)results=[{src:'',err:'請先貼上以 https:// 開頭的蝦皮商品網址。'}];
+ render();
 });
 $('copyAll').addEventListener('click',function(){
-  var ok=results.filter(function(r){return r.out}).map(function(r){return r.out});
-  if(ok.length)copy(ok.join('\n\n'),$('copyAll'));
+ var ok=results.filter(function(r){return r.out}).map(function(r){return r.out});
+ if(ok.length)copy(ok.join('\n'),$('copyAll'));
 });
 })();
 </script>
