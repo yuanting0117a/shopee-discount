@@ -93,7 +93,6 @@ function render(){
   else{
    var o=document.createElement('div');o.className='out';o.textContent=r.out;d.appendChild(o);
    var mt=document.createElement('div');mt.className='meta';
-   var t=document.createElement('span');t.textContent='分潤連結已產生';mt.appendChild(t);
    var b=document.createElement('button');b.className='ghost';b.textContent='複製連結';
    b.addEventListener('click',function(){copy(r.out,b)});mt.appendChild(b);
    var goBtn=document.createElement('button');goBtn.className='primary';goBtn.textContent='直接前往購買';
